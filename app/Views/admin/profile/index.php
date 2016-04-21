@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Mon Profil</h1>
+        <h1 class="page-header">Mon Profil (admin)</h1>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
 
 <br>
 
-<a href="index.php?p=users.mdp">Changer de mot de passe</a>
+<a href="index.php?p=admin.profile.mdp">Changer de mot de passe</a>
 
 <form action="index.php?p=users.updateDescription" method="post">
     <?= $form->input('id', '', ['type' => 'hidden']); ?>

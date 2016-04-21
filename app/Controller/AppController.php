@@ -7,7 +7,7 @@ use \App;
 class AppController extends Controller
 {
 
-	protected $template = 'default';
+	protected $template = 'admin';
 
 	public function __construct()
 	{

@@ -7,7 +7,7 @@ App::load();
 if(isset($_GET['p'])){
     $p = $_GET['p'];
 } else {
-    $p = 'admin.users.index';
+    $p = 'users.login';
 }
 
 $page = explode('.', $p);

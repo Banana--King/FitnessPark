@@ -6,19 +6,17 @@
  * and open the template in the editor.
  */
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Core\HTML\BootstrapForm;
-use Core\Auth\DBAuth;
 use Core\Session\Session;
-use \App;
 
 /**
- * Description of UsersController
+ * Description of ProfileController
  *
  * @author quentin.hoarau
  */
-class UsersController extends AppController
+class ProfileController extends AppController
 {
     
     public function __construct()
@@ -27,55 +25,16 @@ class UsersController extends AppController
         $this->loadModel('User');
     }
     
-    public function login()
-    {
-        $this->setTemplate('login');
-
-        $errors = false;
-        if( !empty($_POST) ){
-            $auth = new DBAuth(App::getInstance()->getDb());
-            if($auth->login($_POST['username'], $_POST['password'])){
-                $type = $_SESSION['type'];
-                if($type == 'admin'){
-                    header('Location: index.php?p=admin.profile.index');
-                } else {
-                    header('Location: index.php?p=users.index');
-                }
-            } else {
-                $errors = true;
-            }
-        }
-
-        $form = new BootstrapForm($_POST);
-
-        $this->render('users.login', compact('form', 'errors'));
-    }
     
+    /**
+     * Affiche la page de profil de l'administrateur
+     */
     public function index()
     {
-        $this->setTemplate($_SESSION['type']);
-        
         $item = $this->User->find($_SESSION['auth']);
         
         $form = new BootstrapForm($item);
-        $this->render('users.index', compact('item', 'form'));
-    }
-    
-    public function updateDescription()
-    {
-        if( !empty($_POST) ){
-            $result = $this->User->update($_POST['id'], [
-                'description' => $_POST['description']
-            ]);
-            
-            if($result){
-                Session::setFlash("Votre description a bien été modifiée", 'success');
-            } else {
-                Session::setFlash("Erreur lors de la modification ...", 'danger');
-            }
-            
-            return $this->index();
-        }
+        $this->render('admin.profile.index', compact('item', 'form'));
     }
     
     public function mdp()
@@ -104,6 +63,7 @@ class UsersController extends AppController
             }
         }
         
-        $this->render('users.mdp', compact('item', 'form'));
+        $this->render('admin.profile.mdp', compact('item', 'form'));
     }
+    
 }
