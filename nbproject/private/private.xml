@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Entity/LogEntity.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/HTML/Form.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/App.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Entity/UserEntity.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Session/Session.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/index.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Controller/Controller.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/AppController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Config.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/logs/index.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/users/edit.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Autoloader.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/public/index.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/login.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/config/config.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/LogsController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/mdp.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Table/LogTable.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Database/MysqlDatabase.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Table/Table.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/UsersController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/HTML/BootstrapForm.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/users/index.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/login.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Autoloader.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/UsersController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Table/UserTable.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Database/Database.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Entity/Entity.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/AppController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Auth/DBAuth.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/default.php</file>
+        </group>
+    </open-files>
+</project-private>
