@@ -13,8 +13,10 @@ class AppController extends \App\Controller\AppController
         //Auth
         $app = App::getInstance();
         $auth = new DBAuth($app->getDb());
-        /*if (!$auth->logged()) { 
+        if (!$auth->logged()) { 
             $this->forbidden();
-        }*/
+        } else {
+            $this->checkAuth('admin');
+        }
     }
 }

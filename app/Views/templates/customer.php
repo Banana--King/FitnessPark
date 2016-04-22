@@ -59,7 +59,7 @@
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Rechercher Coachs</a>
                         </li>
                         <li>
-                            <a href="index.php?p=users.login"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
+                            <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
                         </li>
                     </ul>
                 </div>

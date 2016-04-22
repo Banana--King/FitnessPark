@@ -16,7 +16,7 @@ class Controller
     }
 
 
-    protected function notFound()
+    public function notFound()
     {
         header('HTTP/1.0 404 Not Found');
         die('Page introuvable');
@@ -32,5 +32,18 @@ class Controller
     protected function setTemplate($template)
     {
         $this->template = $template;
+    }
+    
+    protected function checkAuth($type)
+    {
+        if(isset($_SESSION['type']) && !empty($_SESSION['type'])) {
+            if($_SESSION['type'] != 'admin' && $type == 'admin'){
+                $this->forbidden();
+            } elseif ($_SESSION['type'] == 'admin' && $type != 'admin'){
+                $this->forbidden();
+            }
+        } else {
+            $this->forbidden();
+        }
     }
 }

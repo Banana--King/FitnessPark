@@ -40,32 +40,47 @@ class UsersController extends AppController
      */
     public function add()
     {
-        var_dump($_POST);
-        if (!empty($_POST)) {
-            $result = $this->User->create([
-                'email' => $_POST['email'],
-                'password' => sha1($_POST['password']),
-                'lastName' => $_POST['lastName'],
-                'firstName' => $_POST['firstName'],
-                'description' => $_POST['description'],
-                'type' => $_POST['type'],
-            ]);
-            if($result){
-                Session::setFlash("L'utilisateur à bien été ajouté", 'success');
-            } else {
-                Session::setFlash("Erreur lors de l'ajout d'un utilisateur...", 'danger');
-            }
-            return $this->index();
-        }
-        
         $types = [
             'admin' => 'admin',
             'coach' => 'coach',
             'customer' => 'customer'
         ];
-        $form = new BootstrapForm($_POST);
-
-        $this->render('admin.users.edit', compact('form', 'types'));
+        
+        if (!empty($_POST)) {
+            $empty = false;
+            foreach($_POST as $key => $value){
+                if( $key != 'description' && empty($value) ){
+                    $empty = true;
+                }
+            }
+            
+            if($empty){
+                Session::setFlash("Tous les champs sont obligatoires (sauf description) !", 'warning');
+                $form = new BootstrapForm($_POST);
+            } elseif( $_POST['password'] != $_POST['password2'] ){
+                Session::setFlash("Les mots de passe ne sont pas les mêmes !", 'warning');
+                $form = new BootstrapForm($_POST);
+            } else {
+                $result = $this->User->create([
+                    'email' => $_POST['email'],
+                    'password' => sha1($_POST['password']),
+                    'lastName' => $_POST['lastName'],
+                    'firstName' => $_POST['firstName'],
+                    'description' => $_POST['description'],
+                    'type' => $_POST['type'],
+                ]);
+                if($result){
+                    Session::setFlash("L'utilisateur à bien été ajouté", 'success');
+                } else {
+                    Session::setFlash("Erreur lors de l'ajout d'un utilisateur...", 'danger');
+                }
+                return $this->index();
+            }
+        } else {
+            $form = new BootstrapForm();
+        }
+        
+        $this->render('admin.users.add', compact('form', 'types'));
     }
     
     /**
@@ -75,19 +90,29 @@ class UsersController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $result = $this->User->update($_GET['id'], [
-                'email' => $_POST['email'],
-                'password' => sha1($_POST['password']),
-                'lastName' => $_POST['lastName'],
-                'firstName' => $_POST['firstName'],
-                'description' => $_POST['description'],
-                'type' => $_POST['type'],
-            ]);
-            Session::setFlash("L'utilisateur à bien été modifié", 'success');
-            if($result){
-                return $this->index();
+            $empty = false;
+            foreach($_POST as $key => $value){
+                if( $key != 'description' && empty($value) ){
+                    $empty = true;
+                }
             }
             
+            if($empty){
+                Session::setFlash("Tous les champs sont obligatoires (sauf description) !", 'warning');
+                $form = new BootstrapForm($_POST);
+            } else {
+                $result = $this->User->update($_GET['id'], [
+                    'email' => $_POST['email'],
+                    'lastName' => $_POST['lastName'],
+                    'firstName' => $_POST['firstName'],
+                    'description' => $_POST['description'],
+                    'type' => $_POST['type'],
+                ]);
+                Session::setFlash("L'utilisateur à bien été modifié", 'success');
+                if($result){
+                    return $this->index();
+                }
+            }
         }
         
         $types = [
@@ -96,7 +121,6 @@ class UsersController extends AppController
             'customer' => 'customer'
         ];
         $user = $this->User->find($_GET['id']);
-        var_dump($user);
         $form = new BootstrapForm($user);
 
         $this->render('admin.users.edit', compact('form', 'types'));

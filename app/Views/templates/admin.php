@@ -17,12 +17,17 @@
     <!-- MetisMenu CSS -->
     <link href="/FitnessPark/public/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+    <link href="/FitnessPark/public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="/FitnessPark/public/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/FitnessPark/public/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
+     
+    <!-- FitnessPark custom CSS -->
+    <link href="/FitnessPark/public/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,10 +61,10 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Coachs</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Utilisateurs</a>
+                            <a href="index.php?p=admin.users.index"><i class="fa fa-edit fa-fw"></i> Utilisateurs</a>
                         </li>
                         <li>
-                            <a href="index.php?p=users.login"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
+                            <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
                         </li>
                     </ul>
                 </div>
@@ -88,6 +93,14 @@
     <!-- Custom Theme JavaScript -->
     <script src="/FitnessPark/public/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
     
+    <!-- DataTables JavaScript -->
+    <script src="/FitnessPark/public/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/FitnessPark/public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="/FitnessPark/public/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+
+    <script>
+        $(".fitnesspark-datatable").DataTable();
+    </script>
 </body>
 
 </html>

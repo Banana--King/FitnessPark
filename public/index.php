@@ -20,5 +20,10 @@ if($page[0] === 'admin'){
     $action = $page[1];
 }
 
-$controller = new $controller();	
-$controller->$action();
+$controller = new $controller();
+if(method_exists($controller, $action)){
+    $controller->$action();
+} else {
+    $c = new \Core\Controller\Controller();
+    $c->notFound();
+}

@@ -24,16 +24,26 @@ class UsersController extends AppController
     public function __construct()
     {
         parent::__construct();
+        
         $this->loadModel('User');
     }
     
     public function login()
     {
+        $auth = new DBAuth(App::getInstance()->getDb());
+        if($auth->logged()){
+            $type = $_SESSION['type'];
+            if($type == 'admin'){
+                header('Location: index.php?p=admin.profile.index');
+            } else {
+                header('Location: index.php?p=users.index');
+            }
+        }
+        
         $this->setTemplate('login');
-
+        
         $errors = false;
         if( !empty($_POST) ){
-            $auth = new DBAuth(App::getInstance()->getDb());
             if($auth->login($_POST['username'], $_POST['password'])){
                 $type = $_SESSION['type'];
                 if($type == 'admin'){
@@ -51,8 +61,17 @@ class UsersController extends AppController
         $this->render('users.login', compact('form', 'errors'));
     }
     
+    public function logout()
+    {
+        $_SESSION = array();
+        
+        $this->login();
+    }
+    
     public function index()
     {
+        $this->checkAuth('user');
+        
         $this->setTemplate($_SESSION['type']);
         
         $item = $this->User->find($_SESSION['auth']);
@@ -63,6 +82,8 @@ class UsersController extends AppController
     
     public function updateDescription()
     {
+        $this->checkAuth('user');
+        
         if( !empty($_POST) ){
             $result = $this->User->update($_POST['id'], [
                 'description' => $_POST['description']
@@ -80,6 +101,10 @@ class UsersController extends AppController
     
     public function mdp()
     {
+        $this->checkAuth('user');
+        
+        $this->setTemplate($_SESSION['type']);
+        
         $item = $this->User->find($_SESSION['auth']);
         $form = new BootstrapForm();
         

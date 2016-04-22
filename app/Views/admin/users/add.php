@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-    <h1 class="page-header">Modifier un utilisateur</h1>
+    <h1 class="page-header">Ajouter un utilisateur</h1>
     </div>
 </div>
 
@@ -20,6 +20,8 @@
 
 <form method="post">
     <?= $form->input('email', 'Email', ['type' => 'email']); ?>
+    <?= $form->input('password', 'Mot de passe', ['type' => 'password']); ?>
+    <?= $form->input('password2', 'Mot de passe', ['type' => 'password']); ?>
     <?= $form->input('lastName', 'Nom'); ?>
     <?= $form->input('firstName', 'Prénom'); ?>
     <?= $form->input('description', 'Description', ['type' => 'textarea']); ?>

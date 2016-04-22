@@ -32,7 +32,7 @@ class ProfileController extends AppController
     public function index()
     {
         $item = $this->User->find($_SESSION['auth']);
-        
+
         $form = new BootstrapForm($item);
         $this->render('admin.profile.index', compact('item', 'form'));
     }
