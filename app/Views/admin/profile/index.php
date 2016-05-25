@@ -15,7 +15,7 @@
 
 <a href="index.php?p=admin.profile.mdp">Changer de mot de passe</a>
 
-<form action="index.php?p=users.updateDescription" method="post">
+<form action="index.php?p=admin.profile.updateDescription" method="post">
     <?= $form->input('id', '', ['type' => 'hidden']); ?>
     <?= $form->input('description', 'Description', ['type' => 'textarea']); ?>
     <button class="btn btn-primary">Sauvegarder</button>

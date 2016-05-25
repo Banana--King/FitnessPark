@@ -37,6 +37,23 @@ class ProfileController extends AppController
         $this->render('admin.profile.index', compact('item', 'form'));
     }
     
+    public function updateDescription()
+    {
+        if( !empty($_POST) ){
+            $result = $this->User->update($_POST['id'], [
+                'description' => $_POST['description']
+            ]);
+            
+            if($result){
+                Session::setFlash("Votre description a bien été modifiée", 'success');
+            } else {
+                Session::setFlash("Erreur lors de la modification ...", 'danger');
+            }
+            
+            return $this->index();
+        }
+    }
+    
     public function mdp()
     {
         $item = $this->User->find($_SESSION['auth']);

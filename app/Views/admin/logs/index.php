@@ -14,8 +14,8 @@
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-condensed">
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-condensed fitnesspark-datatable">
         <thead>
             <tr>
                 <th>ID</th>

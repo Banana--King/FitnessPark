@@ -28,6 +28,7 @@
      
     <!-- FitnessPark custom CSS -->
     <link href="/FitnessPark/public/css/style.css" rel="stylesheet">
+    <link href="/FitnessPark/public/bower_components/datatables.net-buttons-dt/css/buttons.datatables.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,13 +53,13 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
+                            <a href="index.php?p=admin.profile.index"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Logs</a>
+                            <a href="index.php?p=admin.logs.index"><i class="fa fa-bar-chart-o fa-fw"></i> Logs</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Coachs</a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Coachs</a>
                         </li>
                         <li>
                             <a href="index.php?p=admin.users.index"><i class="fa fa-edit fa-fw"></i> Utilisateurs</a>
@@ -97,9 +98,26 @@
     <script src="/FitnessPark/public/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/FitnessPark/public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     <script src="/FitnessPark/public/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
-
+    <script src="/FitnessPark/public/bower_components/datatables.net-buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+    <script src="/FitnessPark/public/bower_components/jszip/dist/jszip.js" type="text/javascript"></script>
+    <script src="/FitnessPark/public/bower_components/pdfmake/build/pdfmake.js" type="text/javascript"></script>
+    <script src="/FitnessPark/public/bower_components/pdfmake/build/vfs_fonts.js" type="text/javascript"></script>
+    <script src="/FitnessPark/public/bower_components/datatables.net-buttons/js/buttons.html5.js" type="text/javascript"></script>
+    
+    
     <script>
-        $(".fitnesspark-datatable").DataTable();
+        $(document).ready(function() {
+            var table = $('.fitnesspark-datatable').DataTable();
+            
+            new $.fn.dataTable.Buttons( table, {
+                buttons: [
+                    'copy', 'pdf', 'excel', 'csv'
+                ]
+            } );
+            
+            table.buttons().container()
+                .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+        } );
     </script>
 </body>
 
