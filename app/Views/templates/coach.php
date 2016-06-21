@@ -50,6 +50,9 @@
                             <a href="index.php?p=users.index"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
                         </li>
                         <li>
+                            <a href="index.php?p=reservation.index"><i class="fa fa-dashboard fa-fw"></i> Mon planning</a>
+                        </li>
+                        <li>
                             <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
                         </li>
                     </ul>
@@ -78,6 +81,44 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/FitnessPark/public/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+    
+    <!-- FullCalendar JavaScript -->
+    <script src="/FitnessPark/public/bower_components/moment/min/moment.min.js" type="text/javascript"></script>
+    <script src='/FitnessPark/public/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+    
+    <script>
+        $(document).ready(function() {
+            
+            $("#index-calendar").fullCalendar({
+                lang: 'fr',
+                defaultView: 'agendaWeek',
+                nowIndicator: true,
+                allDaySlot: false,
+                minTime: "08:00:00",
+                maxTime: "20:00:00",
+                eventClick: function( event, jsEvent, view ){
+                    var event_id = event.description;
+                    $.ajax({
+                        url: 'index.php?p=reservation.getEventById',
+                        data: {
+                            event_id: event_id
+                        },
+                        success: function(response){
+                            console.log(response);
+                            $("#event-description-modal #result").html(response);
+                            $("#event-description-modal").modal();
+                        },
+                        error: function(){
+                            alert("Il y a eu une erreur lors du chargement de l'event...");
+                        }
+                    });
+                },
+                eventSources: [
+                    'index.php?p=reservation.getEventsByUser'
+                ]
+            });
+        });
+    </script>
     
 </body>
 

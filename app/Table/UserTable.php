@@ -18,6 +18,9 @@ use \Core\Table\Table;
 class UserTable extends Table
 {
     
-    
+    public function getAllByType($type)
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE type = ?", [$type]);
+    }
     
 }

@@ -49,7 +49,7 @@ class App
         return $this->db_instance;
     }
 
-
+    
     public function getTitle()
     {
         return $this->title;

@@ -59,9 +59,6 @@
                             <a href="index.php?p=admin.logs.index"><i class="fa fa-bar-chart-o fa-fw"></i> Logs</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Coachs</a>
-                        </li>
-                        <li>
                             <a href="index.php?p=admin.users.index"><i class="fa fa-edit fa-fw"></i> Utilisateurs</a>
                         </li>
                         <li>

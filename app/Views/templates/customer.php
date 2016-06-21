@@ -50,10 +50,10 @@
                             <a href="index.php?p=users.index"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Réserver Coach</a>
+                            <a href="index.php?p=reservation.newReservationForm"><i class="fa fa-bar-chart-o fa-fw"></i> Réserver Coach</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Mes réservations</a>
+                            <a href="index.php?p=reservation.index"><i class="fa fa-table fa-fw"></i> Mes réservations</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Rechercher Coachs</a>
@@ -87,6 +87,102 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/FitnessPark/public/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+    
+    <!-- FullCalendar JavaScript -->
+    <script src="/FitnessPark/public/bower_components/moment/min/moment.min.js" type="text/javascript"></script>
+    <script src='/FitnessPark/public/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+    
+    <script>
+        $(document).ready(function() {
+            $("#daterange").on("click", function(){
+                $("#daterange-modal").modal();
+            });
+            $("#daterange").keyup(function(){
+                $("#daterange").val('');
+            });
+            
+            $("#index-calendar").fullCalendar({
+                lang: 'fr',
+                defaultView: 'agendaWeek',
+                nowIndicator: true,
+                allDaySlot: false,
+                minTime: "08:00:00",
+                maxTime: "20:00:00",
+                eventClick: function( event, jsEvent, view ){
+                    var event_id = event.description;
+                    $.ajax({
+                        url: 'index.php?p=reservation.getEventById',
+                        data: {
+                            event_id: event_id
+                        },
+                        success: function(response){
+                            console.log(response);
+                            $("#event-description-modal #result").html(response);
+                            $("#event-description-modal").modal();
+                        },
+                        error: function(){
+                            alert("Il y a eu une erreur lors du chargement de l'event...");
+                        }
+                    });
+                },
+                eventSources: [
+                    'index.php?p=reservation.getEventsByUser'
+                ]
+            });
+            
+            var maxDate = Date();
+            $('#reservation-calendar').fullCalendar({
+                lang: 'fr',
+                defaultView: 'agendaWeek',
+                selectable: true,
+                selectHelper: true,
+                nowIndicator: true,
+                allDaySlot: false,
+                minTime: "08:00:00",
+                maxTime: "20:00:00",
+                selectOverlap: false,
+                select: function(start, end, jsEvent, view) {
+                    var today = moment();
+                    if(start < today){
+                        $('#reservation-calendar').fullCalendar('unselect');
+                        return;
+                    }
+                    if(start._i[2] != end._i[2]){
+                        $('#reservation-calendar').fullCalendar('unselect');
+                        return;
+                    }
+                    
+                    $.each(start._i, function(index, value){
+                        if(value.toString().length < 2){
+                            if(index === 1){
+                                value = (value+1);
+                            }
+                            var tmp_string = "0" + value;
+                            start._i[index] = tmp_string;
+                        }
+                    });
+                    $.each(end._i, function(index, value){
+                        if(value.toString().length < 2){
+                            if(index === 1){
+                                value = (value+1);
+                            }
+                            var tmp_string = "0" + value;
+                            end._i[index] = tmp_string;
+                        }
+                    });
+                    
+                    var event_start = start._i[0]+"-"+start._i[1]+"-"+start._i[2]+" "+start._i[3]+":"+start._i[4]+":"+start._i[5];
+                    var event_end = end._i[0]+"-"+end._i[1]+"-"+end._i[2]+" "+end._i[3]+":"+end._i[4]+":"+end._i[5];
+                    
+                    $("#daterange").val(event_start + " - " + event_end);
+                    $("#daterange-modal").modal('hide');
+                },
+                eventSources: [
+                    'index.php?p=reservation.getAllEvents'
+                ]
+            });
+        });
+    </script>
     
 </body>
 

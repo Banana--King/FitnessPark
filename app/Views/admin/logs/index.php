@@ -19,7 +19,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Adresse IP</th>
+                <th>Utilisateur</th>
                 <th>Message</th>
                 <th>Date</th>
             </tr>
@@ -28,7 +28,7 @@
             <?php foreach($items as $log) : ?>
             <tr>
                 <td><?= $log->id; ?></td>
-                <td><?= $log->adresseIP; ?></td>
+                <td><?= $log->userId; ?></td>
                 <td><?= $log->message; ?></td>
                 <td><?= $log->date; ?></td>
             </tr>
