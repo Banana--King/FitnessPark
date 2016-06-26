@@ -85,6 +85,16 @@ class ReservationController extends AppController
             $event["start"] = $reservation->start;
             $event["end"] = $reservation->end;
             $event["description"] = $reservation->id;
+            
+            switch($reservation->level){
+                case 1: $event["color"] = "green"; break;
+                case 2: $event["color"] = "orange"; break;
+                case 3: $event["color"] = "red"; break;
+            }
+            if($reservation->askForDelete == 1){
+                $event["color"] = "grey";
+            }
+            
             array_push($json_events, $event);
         }
         $result = json_encode($json_events);
@@ -160,6 +170,47 @@ class ReservationController extends AppController
         }
         
         $this->index();
+    }
+    
+    public function askForDelete()
+    {
+        if (!empty($_GET)) {
+            $result = $this->Reservation->update($_GET['event_id'], [
+                'askForDelete' => 1,
+            ]);
+            Session::setFlash("La demande de suppression a été prise en compte", 'success');
+            
+            // on log la demande d'annulation
+            $reservation = $this->Reservation->find($_GET['event_id']);
+            $user = $this->User->find($reservation->id_customer);
+            $coach = $this->User->find($reservation->id_coach);
+            $message = "Demande de suppression reservation: client: ".$user->email.", coach: ".$coach->email;
+            $this->log($message);
+            
+            return $this->index();
+        }
+    }
+    
+    public function delete()
+    {
+        if (!empty($_GET)) {
+            $reservation = $this->Reservation->find($_GET['event_id']);
+            
+            $result = $this->Reservation->delete($_GET['event_id']);
+            
+            if($result){
+                Session::setFlash("La séance à bien été supprimé", 'success');
+            
+                // on log l'annulation
+                $user = $this->User->find($reservation->id_customer);
+                $coach = $this->User->find($reservation->id_coach);
+                $message = "Suppression reservation: client: ".$user->email.", coach: ".$coach->email;
+                $this->log($message);
+            }
+            
+            
+            return $this->index();
+        }
     }
     
     public function log($message)

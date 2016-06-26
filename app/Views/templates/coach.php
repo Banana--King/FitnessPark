@@ -88,6 +88,9 @@
     
     <script>
         $(document).ready(function() {
+            $("#delete-reservation").on('click', function(){
+                $("#delete-confirmation").modal();
+            });
             
             $("#index-calendar").fullCalendar({
                 lang: 'fr',
@@ -104,8 +107,14 @@
                             event_id: event_id
                         },
                         success: function(response){
-                            console.log(response);
                             $("#event-description-modal #result").html(response);
+                            if(event.color == "grey"){
+                                $("#delete-reservation").removeClass("hidden");
+                                $("#confirm").attr("href", "index.php?p=reservation.delete&event_id="+event_id);
+                            } else {
+                                $("#delete-reservation").addClass("hidden");
+                            }
+                            
                             $("#event-description-modal").modal();
                         },
                         error: function(){

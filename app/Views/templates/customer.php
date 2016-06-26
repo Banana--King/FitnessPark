@@ -56,7 +56,7 @@
                             <a href="index.php?p=reservation.index"><i class="fa fa-table fa-fw"></i> Mes réservations</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Rechercher Coachs</a>
+                            <a href="index.php?p=users.searchCoach"><i class="fa fa-edit fa-fw"></i> Rechercher Coachs</a>
                         </li>
                         <li>
                             <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
@@ -94,11 +94,16 @@
     
     <script>
         $(document).ready(function() {
+            var event_selected;
             $("#daterange").on("click", function(){
                 $("#daterange-modal").modal();
             });
             $("#daterange").keyup(function(){
                 $("#daterange").val('');
+            });
+            
+            $("#delete-reservation").on('click', function(){
+                $("#delete-confirmation").modal();
             });
             
             $("#index-calendar").fullCalendar({
@@ -109,6 +114,7 @@
                 minTime: "08:00:00",
                 maxTime: "20:00:00",
                 eventClick: function( event, jsEvent, view ){
+                    event_selected = event;
                     var event_id = event.description;
                     $.ajax({
                         url: 'index.php?p=reservation.getEventById',
@@ -116,8 +122,16 @@
                             event_id: event_id
                         },
                         success: function(response){
-                            console.log(response);
+                            $("#delete-reservation").removeClass("disabled");
                             $("#event-description-modal #result").html(response);
+                            
+                            var now = moment();
+                            var limit_time = now.add(4, 'hours');
+                            if(event.start < limit_time){
+                                $("#delete-reservation").addClass("disabled");
+                            } else {
+                                $("#confirm").attr("href", "index.php?p=reservation.askForDelete&event_id="+event_id);
+                            }
                             $("#event-description-modal").modal();
                         },
                         error: function(){
@@ -144,7 +158,7 @@
                 select: function(start, end, jsEvent, view) {
                     var today = moment();
                     var min_date = today.add(4, 'hours');
-                    if(start < today){
+                    if(start < min_date){
                         $('#reservation-calendar').fullCalendar('unselect');
                         return;
                     }
@@ -185,6 +199,25 @@
                 eventSources: [
                     'index.php?p=reservation.getAllEvents'
                 ]
+            });
+            
+            
+            // searchCoach
+            $("#coach-selection").on('change', function(){
+                var coach_id = $("#coach-selection").val();
+                if(coach_id == ""){
+                    $("#coach-result").html("");
+                    return;
+                }
+                $.ajax({
+                    url: 'index.php?p=users.getCoachInfos',
+                    data: {
+                        coach_id: coach_id
+                    },
+                    success: function(response){
+                        $("#coach-result").html(response);
+                    }
+                });
             });
         });
     </script>

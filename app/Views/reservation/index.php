@@ -37,7 +37,27 @@ if($_SESSION['type'] == "coach"){
         <div id="result"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class="btn btn-danger" id="delete-reservation" type="button" class="btn btn-default">Annuler</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="delete-confirmation" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Supprimer ma séance</h4>
+      </div>
+      <div class="modal-body">
+        <div id="result">Etes-vous sûr de vouloir supprimer cette séance ?</div>
+      </div>
+      <div class="modal-footer">
+        <a href="" class="btn btn-danger" id="confirm">Oui</a>
+        <button class="btn btn-primary" type="button" class="btn btn-default" data-dismiss="modal">Non</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -65,7 +65,7 @@ class UsersController extends AppController
     }
     
     public function logout()
-    {            
+    {
         $_SESSION = array();
         
         $this->login();
@@ -143,6 +143,25 @@ class UsersController extends AppController
         }
         
         $this->render('users.mdp', compact('item', 'form'));
+    }
+    
+    public function searchCoach()
+    {
+        $this->checkAuth('user');
+        $this->setTemplate($_SESSION['type']);
+        
+        // obtenir tous les coaches
+        $items = $this->User->getAllByType("coach");
+        
+        $this->render('users.searchCoach', compact('items'));
+    }
+    
+    public function getCoachInfos()
+    {
+        // obtenir les infos d'un coach
+        $item = $this->User->find($_GET["coach_id"]);
+        
+        $this->renderAjax("users.coachInfos", compact('item'));
     }
     
     public function log($message)
