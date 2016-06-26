@@ -22,6 +22,7 @@ class ReservationController extends AppController
         parent::__construct();
         $this->loadModel("Reservation");
         $this->loadModel("User");
+        $this->loadModel("Log");
     }
     
     public function index()
@@ -44,14 +45,23 @@ class ReservationController extends AppController
     public function getAllEvents()
     {
         $reservations = $this->Reservation->all();
-        
         // création du JSON
         $json_events = [];
         foreach ($reservations as $reservation){
             $event = [];
+            
+            $bla = strtotime($reservation->end);
+            $bla += 1800;
+            $test = date("Y-m-d H:i:s", $bla);
+            $end_parts = explode(" ", $test);
+            if($end_parts[1] == "20:30:00"){
+                $end_parts[1] = "20:00:00";
+            }
+            $end = $end_parts[0]." ".$end_parts[1];
+            
             $event["title"] = "Occupé";
             $event["start"] = $reservation->start;
-            $event["end"] = $reservation->end;
+            $event["end"] = $end;
             array_push($json_events, $event);
         }
         $result = json_encode($json_events);
@@ -140,10 +150,23 @@ class ReservationController extends AppController
             ]);
 
             // il faut logger le message !
+            $user = $this->User->find($user_id);
+            $coach = $this->User->find($_POST["coach"]);
+            $message = "Nouvelle reservation: type".$_POST["type_seance"].", client: ".$user->email;
+            $message .= ", coach: ".$coach->email.", adresse: ".$_POST["address"];
+            $this->log($message);
             
             Session::setFlash("Votre réservation a été prise en compte", 'success');
         }
         
         $this->index();
+    }
+    
+    public function log($message)
+    {
+        $this->Log->create([
+            'userId' => $_SESSION["auth"],
+            'message' => $message,
+        ]);
     }
 }

@@ -3,45 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/users/add.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/public/js/script.js</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Entity/LogEntity.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Table/ReservationTable.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/App.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/coach.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Entity/UserEntity.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Session/Session.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/index.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/reservation/new_reservation.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/ProfileController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Controller/Controller.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/AppController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Config.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/logs/index.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/users/edit.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/login.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/public/index.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/customer.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/config/config.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/LogsController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Table/LogTable.php</file>
             <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/LogController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Table/Table.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/UsersController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/login.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/users/index.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/admin.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/ajax.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/ReservationController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/Admin/UsersController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/public/css/style.css</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Table/UserTable.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/reservation/index.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/admin/profile/index.php</file>
             <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/AppController.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/core/Auth/DBAuth.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Entity/ReservationEntity.php</file>
-            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/reservation/eventDetails.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/UsersController.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/templates/customer.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Views/users/login.php</file>
+            <file>file:/C:/Users/quentin.hoarau/Documents/NetBeansProjects/FitnessPark/app/Controller/ReservationController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -26,13 +26,16 @@ class UsersController extends AppController
         parent::__construct();
         
         $this->loadModel('User');
+        $this->loadModel('Log');
     }
     
     public function login()
     {
         $auth = new DBAuth(App::getInstance()->getDb());
+        
         if($auth->logged()){
             $type = $_SESSION['type'];
+            
             if($type == 'admin'){
                 header('Location: index.php?p=admin.profile.index');
             } else {
@@ -62,7 +65,7 @@ class UsersController extends AppController
     }
     
     public function logout()
-    {
+    {            
         $_SESSION = array();
         
         $this->login();
@@ -90,6 +93,11 @@ class UsersController extends AppController
             ]);
             
             if($result){
+                // logs
+                $user = $this->User->find($_POST["id"]);
+                $message = "Modification description: user: ".$user->email;
+                $this->log($message);
+                
                 Session::setFlash("Votre description a bien été modifiée", 'success');
             } else {
                 Session::setFlash("Erreur lors de la modification ...", 'danger');
@@ -125,10 +133,23 @@ class UsersController extends AppController
                 $result = $this->User->update($item->id, [
                     'password' => sha1($new_pass),
                 ]);
+                
+                // logs
+                $message = "Modification password: user: ".$item->email;
+                $this->log($message);
+                
                 $this->index();
             }
         }
         
         $this->render('users.mdp', compact('item', 'form'));
+    }
+    
+    public function log($message)
+    {
+        $this->Log->create([
+            'userId' => $_SESSION["auth"],
+            'message' => $message,
+        ]);
     }
 }

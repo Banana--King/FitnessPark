@@ -143,11 +143,16 @@
                 selectOverlap: false,
                 select: function(start, end, jsEvent, view) {
                     var today = moment();
+                    var min_date = today.add(4, 'hours');
                     if(start < today){
                         $('#reservation-calendar').fullCalendar('unselect');
                         return;
                     }
-                    if(start._i[2] != end._i[2]){
+                    
+                    var duration = moment.duration(end.diff(start));
+                    var hours = duration.asHours();
+                    console.log(hours);
+                    if(hours < 1 || hours > 2){
                         $('#reservation-calendar').fullCalendar('unselect');
                         return;
                     }
