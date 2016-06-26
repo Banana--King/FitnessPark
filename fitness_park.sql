@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 26 Juin 2016 à 17:21
+-- Généré le :  Dim 26 Juin 2016 à 21:54
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(255) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `logs`
@@ -70,7 +70,19 @@ INSERT INTO `logs` (`id`, `userId`, `message`, `date`) VALUES
 (28, '16', 'Nouvelle reservation: typeCardio, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: zzzz', '2016-06-26 15:48:14'),
 (29, '16', 'Nouvelle reservation: typeCardio, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: zzzz', '2016-06-26 15:49:25'),
 (30, '16', 'Nouvelle reservation: typeCardio, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: jijijij', '2016-06-26 16:02:58'),
-(31, '16', 'Nouvelle reservation: typeRenforcement musculaire, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: iiiii', '2016-06-26 16:03:21');
+(31, '16', 'Nouvelle reservation: typeRenforcement musculaire, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: iiiii', '2016-06-26 16:03:21'),
+(32, '16', 'Nouvelle reservation: typeCardio, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: ffff', '2016-06-26 22:18:50'),
+(33, '16', 'Nouvelle reservation: typeCardio, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: fefefe', '2016-06-26 22:19:07'),
+(34, '16', 'Nouvelle reservation: typeRenforcement musculaire, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: ssss', '2016-06-26 22:25:52'),
+(35, '16', 'Nouvelle reservation: typeYoga, client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr, adresse: kjkjkjkj', '2016-06-26 22:26:26'),
+(36, '16', 'Demande de suppression reservation: client: quentin.hoarau@fitnesspark.fr, coach: ', '2016-06-26 22:51:19'),
+(37, '16', 'Demande de suppression reservation: client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr', '2016-06-26 22:53:21'),
+(38, '15', 'Suppression reservation: client: , coach: ', '2016-06-26 22:55:29'),
+(39, '15', 'Suppression reservation: client: , coach: ', '2016-06-26 22:56:43'),
+(40, '15', 'Suppression reservation: client: , coach: ', '2016-06-26 22:56:45'),
+(41, '16', 'Demande de suppression reservation: client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr', '2016-06-26 22:57:20'),
+(42, '15', 'Suppression reservation: client: quentin.hoarau@fitnesspark.fr, coach: julien.gauthier@fitnesspark.fr', '2016-06-26 22:57:58'),
+(43, '15', 'Modification description: user: julien.gauthier@fitnesspark.fr', '2016-06-26 23:49:16');
 
 -- --------------------------------------------------------
 
@@ -88,17 +100,17 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `address` varchar(255) NOT NULL,
   `start` datetime NOT NULL,
   `end` datetime NOT NULL,
+  `askForDelete` tinyint(1) NOT NULL DEFAULT '0',
   `date_creation` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `reservations`
 --
 
-INSERT INTO `reservations` (`id`, `type`, `id_customer`, `id_coach`, `level`, `address`, `start`, `end`, `date_creation`) VALUES
-(1, 'Cardio', 16, 15, '1', 'jijijij', '2016-06-27 08:30:00', '2016-06-27 10:30:00', '2016-06-26 16:02:58'),
-(2, 'Renforcement musculaire', 16, 15, '2', 'iiiii', '2016-06-27 11:00:00', '2016-06-27 12:30:00', '2016-06-26 16:03:21');
+INSERT INTO `reservations` (`id`, `type`, `id_customer`, `id_coach`, `level`, `address`, `start`, `end`, `askForDelete`, `date_creation`) VALUES
+(5, 'Renforcement musculaire', 16, 15, '2', 'ssss', '2016-06-27 12:30:00', '2016-06-27 14:00:00', 0, '2016-06-26 22:25:52');
 
 -- --------------------------------------------------------
 
@@ -125,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `email`, `password`, `lastName`, `firstName`, `description`, `type`) VALUES
 (1, 'admin@fitnesspark.fr', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Blue', 'Johnny', 'Administrateur du Backend rÃ©servation de coach en ligne', 'admin'),
 (16, 'quentin.hoarau@fitnesspark.fr', 'bba68d49f013544eca3988ee173b502213e5ac62', 'Hoarau', 'Quentin', 'test de description', 'customer'),
-(15, 'julien.gauthier@fitnesspark.fr', 'c63c8ec7f6e2308874076f269e863af55d2cc22e', 'Gauthier', 'Julien', '', 'coach'),
+(15, 'julien.gauthier@fitnesspark.fr', 'c63c8ec7f6e2308874076f269e863af55d2cc22e', 'Gauthier', 'Julien', 'Je suis Julien Gauthier\r\nMa spÃ©cialitÃ©: la musculation ainsi que le cardio', 'coach'),
 (14, 'coach2@fitnesspark.fr', 'cf7ccba71746fc061551ba7e7ce70c9bd1368058', 'coach2', 'Coach2', 'blablabla', 'coach'),
 (13, 'coach@fitnesspark.fr', 'c63c8ec7f6e2308874076f269e863af55d2cc22e', 'coach', 'coach', '', 'coach'),
 (12, 'test@fitnesspark.fr', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 'test', 'test', '', 'customer');
