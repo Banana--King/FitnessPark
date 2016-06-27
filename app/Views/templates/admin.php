@@ -53,16 +53,16 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.php?p=admin.profile.index"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
+                            <a href="index.php?p=admin.profile.index"><i class="fa fa-user fa-fw"></i> Mon profil</a>
                         </li>
                         <li>
-                            <a href="index.php?p=admin.logs.index"><i class="fa fa-bar-chart-o fa-fw"></i> Logs</a>
+                            <a href="index.php?p=admin.logs.index"><i class="fa fa-book fa-fw"></i> Logs</a>
                         </li>
                         <li>
-                            <a href="index.php?p=admin.users.index"><i class="fa fa-edit fa-fw"></i> Utilisateurs</a>
+                            <a href="index.php?p=admin.users.index"><i class="fa fa-users fa-fw"></i> Utilisateurs</a>
                         </li>
                         <li>
-                            <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
+                            <a href="index.php?p=users.logout"><i class="fa fa-sign-out fa-fw"></i> Deconnexion</a>
                         </li>
                     </ul>
                 </div>

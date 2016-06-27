@@ -47,13 +47,13 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.php?p=users.index"><i class="fa fa-dashboard fa-fw"></i> Mon profil</a>
+                            <a href="index.php?p=users.index"><i class="fa fa-user fa-fw"></i> Mon profil</a>
                         </li>
                         <li>
-                            <a href="index.php?p=reservation.index"><i class="fa fa-dashboard fa-fw"></i> Mon planning</a>
+                            <a href="index.php?p=reservation.index"><i class="fa fa-calendar fa-fw"></i> Mon planning</a>
                         </li>
                         <li>
-                            <a href="index.php?p=users.logout"><i class="fa fa-wrench fa-fw"></i> Deconnexion</a>
+                            <a href="index.php?p=users.logout"><i class="fa fa-sign-out fa-fw"></i> Deconnexion</a>
                         </li>
                     </ul>
                 </div>
