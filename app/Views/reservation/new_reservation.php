@@ -22,7 +22,7 @@
 
 <link rel='stylesheet' href='/FitnessPark/public/bower_components/fullcalendar/dist/fullcalendar.css' />
 
-<form action="index.php?p=reservation.add" method="POST">
+<form id="reservation-form" action="index.php?p=reservation.add" method="POST">
     <div class="row">
         <div class="col-md-6">      
             <div class="form-group">
@@ -66,7 +66,7 @@
             </div>
 
             <div class="form-group">
-                <label>Adresse (à vérifier pour valider la réservation)</label>
+                <label>Adresse</label>
                 <div class="input-group">
                     <input id="address" type="text" class="form-control" name="address">
                     <span class="input-group-btn">
@@ -88,7 +88,7 @@
         </div>
     </div>
     
-    <button class="btn btn-primary">Valider</button>
+    <button id="valitaion-btn" class="btn btn-primary">Valider</button>
     <a class="btn btn-default" href="index.php?p=reservation.index">Annuler</a>
 </form>
 
@@ -100,6 +100,7 @@
         <h4 class="modal-title">Plage Hoaraire</h4>
       </div>
       <div class="modal-body">
+        <div id="calendar-message"></div>
         <div id='reservation-calendar'></div>
       </div>
       <div class="modal-footer">

@@ -96,12 +96,13 @@
     
     <script>
         var map;
+        var initialMarker;
         var marker;
         var circle;
         var geocoder;
         var markers = [];
+        var myLatLng = {lat: 48.93585242484315, lng: 2.3009490966796875};
         function initMap() {
-            var myLatLng = {lat: 48.93585242484315, lng: 2.3009490966796875};
 
             // Create a map object and specify the DOM element for display.
             map = new google.maps.Map(document.getElementById('reservation-map'), {
@@ -111,12 +112,12 @@
             });
 
             // Create a marker and set its position.
-            marker = new google.maps.Marker({
+            initialMarker = new google.maps.Marker({
                 map: map,
                 position: myLatLng,
                 title: 'FitnessPark'
             });
-            markers.push(marker);
+            markers.push(initialMarker);
             
             // Add circle overlay and bind to marker
             circle = new google.maps.Circle({
@@ -126,7 +127,7 @@
                 fillColor: '#AA0000',
                 fillOpacity: 0.2
             });
-            circle.bindTo('center', marker, 'position');
+            circle.bindTo('center', initialMarker, 'position');
         }
         
         function pointInCircle(point, radius, center)
@@ -134,7 +135,7 @@
             return (google.maps.geometry.spherical.computeDistanceBetween(point, center) <= radius);
         }
         
-        function message(msg, type)
+        function message(msg, type, target)
         {
             var message = ''
                 +'<p class="alert alert-dismissible alert-'+type+'">'
@@ -143,7 +144,7 @@
                 +   '</button>'
                 +   '<i class="fa fa-warning"> </i> '+ msg
                 +'</p>';
-            $("#message").html(message);
+            $(target).html(message);
         }
         
         $(document).ready(function() {
@@ -155,16 +156,13 @@
                 geocoder = new google.maps.Geocoder();
                 //var address = "48 Avenue Jean Moulin, 92390 Villeneuve-la-Garenne";
                 var address = $("#address").val();
-
                 geocoder.geocode( { 'address': address}, function(results, status) {
-                    //console.log(status);
                     if(status == "ZERO_RESULTS"){
-                        var msg = '<p class="alert alert-warning"><i class="fa fa-warning"> </i> Aucune adresse trouvée...</p>';
-                        $("#message").html(msg);
+                        var msg = 'Aucune adresse trouvée...';
+                        message(msg, 'warning', '#message');
                         return;
                     }
                     if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0]);
                         var latitude = results[0].geometry.location.lat();
                         var longitude = results[0].geometry.location.lng();
                         
@@ -180,19 +178,56 @@
                             });
                             markers.push(marker);
                         } else { // on annule tout
-                            var msg = '<p class="alert alert-dismissible alert-warning"><button type="button" class="close" data-dismiss="alert" aria-label="Close" aria-hidden="true">&times;</span></button><i class="fa fa-warning"> </i> Cette adresse n\'est pas dans la zone recommandee</p>';
-                            $("#message").html(msg);
+                            var msg = 'Cette adresse n\'est pas dans la zone recommandee';
+                            message(msg, 'warning', '#message');
                         }
-                    } 
+                    }
                 }); 
             });
             
             $("#address").on('keyup', function(){
-                console.log(markers);
+                // retire tous les markers de la map
                 $.each(markers, function(key, value){
-                    if(key > 0){
-                        markers[key].setMap(null);
-                        markers.splice(key,1);
+                    markers[key].setMap(null);
+                });
+                
+                // remet le marker initial
+                markers = [];
+                markers.push(initialMarker);
+                
+                // Create a marker and set its position.
+                initialMarker = new google.maps.Marker({
+                    map: map,
+                    position: myLatLng,
+                    title: 'FitnessPark'
+                });
+            });
+            
+            // validation de l'adresse du formulaire avant de l'envoyer
+            $("#reservation-form").on('submit', function(e){
+                e.preventDefault();
+                
+                geocoder = new google.maps.Geocoder();
+                //var address = "48 Avenue Jean Moulin, 92390 Villeneuve-la-Garenne";
+                var address = $("#address").val();
+
+                geocoder.geocode( { 'address': address}, function(results, status) {
+                    if(status == "ZERO_RESULTS"){
+                        var msg = 'Aucune adresse trouvée...';
+                        message(msg, 'warning', '#message');
+                    }
+                    if (status == google.maps.GeocoderStatus.OK) {
+
+                        var tmp_latlng = results[0].geometry.location;
+
+                        // l'adresse demandée est bien dans le périmètre ! donc on peut créer le marker
+                        if( pointInCircle(tmp_latlng, circle.radius, circle.center) ){
+                            $("#reservation-form").unbind('submit');
+                            return false;
+                        } else { // on annule tout
+                            var msg = 'Cette adresse n\'est pas dans la zone recommandee';
+                            message(msg, 'warning', '#message');
+                        }
                     }
                 });
             });
@@ -265,6 +300,8 @@
                     var min_date = today.add(4, 'hours');
                     if(start < min_date){
                         $('#reservation-calendar').fullCalendar('unselect');
+                        var msg = 'Il faut reserver au minimum 3 heures en avance';
+                        message(msg, 'warning', '#calendar-message');
                         return;
                     }
                     
@@ -273,12 +310,13 @@
                     
                     if(hours < 1 || hours > 2){
                         $('#reservation-calendar').fullCalendar('unselect');
+                        var msg = 'la seance doit durer entre 1h et 2h';
+                        message(msg, 'warning', '#calendar-message');
                         return;
                     }
                     
                     var event_start = start.format('YYYY-MM-DD HH:mm:ss');
                     var event_end = end.format('YYYY-MM-DD HH:mm:ss');
-                    
                     
                     // on vérifie s'il y a un event qui commence juste apres
                     var is_next_reservation = function(){
@@ -299,6 +337,8 @@
                     // s'il y a un résultat, on annule tout
                     if(is_next_reservation === 'true'){
                         $('#reservation-calendar').fullCalendar('unselect');
+                        var msg = 'Il faut que la seance se termine 30min avant la suivante (pour laisser au coach d\'effectuer son prochain deplacement)';
+                        message(msg, 'warning', '#calendar-message');
                         return;
                     }
                     
@@ -309,6 +349,10 @@
                 eventSources: [
                     'index.php?p=reservation.getAllEvents'
                 ]
+            });
+            
+            $('#daterange-modal').on('show.bs.modal', function (e) {
+                $("#calendar-message").html('');
             });
             
             
