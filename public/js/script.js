@@ -4,6 +4,4 @@
  * and open the template in the editor.
  */
 
-$('#datatable').DataTable({
-    responsive: true
-});
+var googleMapKey = "AIzaSyBM2ztAQugm4BID2w1QQf_5EvqrGaxCx8Y";

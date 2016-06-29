@@ -24,4 +24,9 @@ class ReservationTable extends \Core\Table\Table
     {
         return $this->query("SELECT * FROM {$this->table} WHERE id_coach = ?", [$id]);
     }
+    
+    public function oneByStartTime($start_time)
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE start = ?", [$start_time]);
+    }
 }

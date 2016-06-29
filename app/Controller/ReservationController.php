@@ -62,6 +62,7 @@ class ReservationController extends AppController
             $event["title"] = "Occupé";
             $event["start"] = $reservation->start;
             $event["end"] = $end;
+            $event["color"] = "lightgrey";
             array_push($json_events, $event);
         }
         $result = json_encode($json_events);
@@ -92,6 +93,7 @@ class ReservationController extends AppController
                 case 3: $event["color"] = "red"; break;
             }
             if($reservation->askForDelete == 1){
+                $event["title"] = $reservation->type." (demande d'annulation)";
                 $event["color"] = "grey";
             }
             
@@ -121,6 +123,18 @@ class ReservationController extends AppController
         $this->renderAjax("reservation.eventDetails", compact('reservation'));
     }
     
+    public function checkIfNextReservation()
+    {
+        extract($_GET);
+        $reservation = $this->Reservation->oneByStartTime($reservation_time);
+        
+        if( empty($reservation) ){
+            echo "false";
+        } else {
+            echo "true";
+        }
+    }
+    
     public function newReservationForm()
     {
         $this->checkAuth('user');
@@ -143,6 +157,7 @@ class ReservationController extends AppController
         
         if($empty){
             Session::setFlash("Tous les champs sont obligatoires", 'danger');
+            return $this->newReservationForm();
         } else {
             $user_id = $_SESSION["auth"];
             $date_parts = explode(" - ", $_POST["daterange"]);
